@@ -56,33 +56,4 @@ public class LogicTest {
         assertThat(exception.getMessage()).isEqualTo("Could not move by diagonal from C8 to A8");
     }
 
-    @Test
-    public void whenPositionIsRightBishopBlack() {
-        Logic logic = new Logic();
-        BishopBlack bishopBlack = new BishopBlack(Cell.C8);
-        Cell startPosition = bishopBlack.position();
-        logic.add(bishopBlack);
-        assertEquals(startPosition, Cell.C8);
-    }
-
-    @Test
-    public void whenCopyPositionIsRightBishopBlack() {
-        Logic logic = new Logic();
-        BishopBlack bishopBlack = new BishopBlack(Cell.C8);
-        logic.add(bishopBlack);
-        Cell startPosition = bishopBlack.position();
-        assertEquals(startPosition, bishopBlack.copy(startPosition).position());
-    }
-
-    @Test
-    public void whenWayIsCorrect() throws OccupiedCellException, FigureNotFoundException {
-        BishopBlack bishopBlack = new BishopBlack(Cell.C1);
-        Logic logic = new Logic();
-        logic.add(bishopBlack);
-        Cell dest = Cell.G5;
-        Cell[] wat = bishopBlack.way(dest);
-        Cell[] wayCopy = {Cell.D2, Cell.E3, Cell.F4, Cell.G5};
-        logic.move(bishopBlack.position(), dest);
-        Assert.assertArrayEquals(wat, wayCopy);
-    }
 }
