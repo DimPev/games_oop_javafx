@@ -58,23 +58,31 @@ public class LogicTest {
 
     @Test
     public void whenPositionIsRightBishopBlack() {
+        Logic logic = new Logic();
         BishopBlack bishopBlack = new BishopBlack(Cell.C8);
         Cell startPosition = bishopBlack.position();
+        logic.add(bishopBlack);
         assertEquals(startPosition, Cell.C8);
     }
 
     @Test
     public void whenCopyPositionIsRightBishopBlack() {
+        Logic logic = new Logic();
         BishopBlack bishopBlack = new BishopBlack(Cell.C8);
+        logic.add(bishopBlack);
         Cell startPosition = bishopBlack.position();
         assertEquals(startPosition, bishopBlack.copy(startPosition).position());
     }
 
     @Test
-    public void whenWayIsCorrect() {
+    public void whenWayIsCorrect() throws OccupiedCellException, FigureNotFoundException {
         BishopBlack bishopBlack = new BishopBlack(Cell.C1);
-        Cell[] way = bishopBlack.way(Cell.G5);
-        Cell[] steps = {Cell.D2, Cell.E3, Cell.F4, Cell.G5};
-        Assert.assertArrayEquals(way, steps);
+        Logic logic = new Logic();
+        logic.add(bishopBlack);
+        Cell dest = Cell.G5;
+        Cell[] wat = bishopBlack.way(dest);
+        Cell[] wayCopy = {Cell.D2, Cell.E3, Cell.F4, Cell.G5};
+        logic.move(bishopBlack.position(), dest);
+        Assert.assertArrayEquals(wat, wayCopy);
     }
 }
